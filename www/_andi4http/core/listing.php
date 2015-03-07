@@ -3,7 +3,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-require implode(DIRECTORY_SEPARATOR, array(__DIR__, 'core', 'core.php'));
+require __DIR__ . DIRECTORY_SEPARATOR . 'core.php';
 
 echo "<!DOCTYPE html>\n";
 echo '<html>';
@@ -15,7 +15,7 @@ echo '<style>body { width: 750px; margin: 20px auto; }</style>';
 echo '</head>';
 echo '<body>';
 
-require andi_build_dir_path(__DIR__, 'global', 'header.php');
+require andi_build_dir_path(ANDI_GLOBAL_DIR, 'header.php');
 
 $local_header_path = andi_build_dir_path($local_path, 'header.html');
 $local_footer_path = andi_build_dir_path($local_path, 'footer.html');
@@ -57,7 +57,7 @@ if (is_file($local_footer_path)) {
 	echo file_get_contents($local_footer_path);
 }
 
-require andi_build_dir_path(__DIR__, 'global', 'footer.php');
+require andi_build_dir_path(ANDI_GLOBAL_DIR, 'footer.php');
 
 echo '</body>';
 echo '</html>';

@@ -6,7 +6,7 @@ require __DIR__ . DIRECTORY_SEPARATOR . 'functions.php';
 define('ANDI_DIR', realpath(__DIR__ . DIRECTORY_SEPARATOR . '..'));
 define('ANDI_ROOT_DIR', realpath(ANDI_DIR . DIRECTORY_SEPARATOR . '..'));
 define('ANDI_CORE_DIR', __DIR__);
-define('ANDI_GLOBAL_DIR', __DIR__ . DIRECTORY_SEPARATOR . 'global');
+define('ANDI_GLOBAL_DIR', ANDI_DIR . DIRECTORY_SEPARATOR . 'global');
 
 // Process the URL.
 $i = strpos($_SERVER['REQUEST_URI'], '?');
@@ -30,7 +30,7 @@ $main_htaccess_file = ANDI_ROOT_DIR . DIRECTORY_SEPARATOR . '.htaccess';
 if (!is_file($main_htaccess_file)) {
 	andi_write_text_file($main_htaccess_file, <<<EOF
 		ServerSignature Off
-		DirectoryIndex /_andi4http/index.php
+		DirectoryIndex /_andi4http/core/listing.php
 		DirectorySlash On
 		AcceptPathInfo Off
 		RewriteEngine On
@@ -48,13 +48,21 @@ EOF
 }
 unset($main_htaccess_file);
 
+// TODO: Use less .htaccess files?
+
 // Create internal .htaccess, it controls the access to the _andi4http directory.
 $internal_htacces_file = ANDI_DIR . DIRECTORY_SEPARATOR . '.htaccess';
 if (!is_file($internal_htacces_file)) {
 	andi_write_text_file($internal_htacces_file, <<<EOF
 		Order Deny,Allow
 		Deny from all
-		<Files index.php>
+EOF
+	);
+}
+$internal_htacces_file = ANDI_CORE_DIR . DIRECTORY_SEPARATOR . '.htaccess';
+if (!is_file($internal_htacces_file)) {
+	andi_write_text_file($internal_htacces_file, <<<EOF
+		<Files listing.php>
 			Order Allow,Deny
 			Allow from all
 		</Files>
