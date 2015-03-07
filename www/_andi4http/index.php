@@ -62,14 +62,15 @@ echo "<!DOCTYPE html>\n";
 echo '<html>';
 echo '<head>';
 echo '<meta charset="utf-8">';
+echo '<link href="//cdn.jsdelivr.net/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" type="text/css">';
 echo '<title>', $url_path_clean, '</title>';
-echo '<style>body { font-family: monospace; }</style>';
+echo '<style>body { width: 750px; margin: 20px auto; }</style>';
 echo '</head>';
 echo '<body>';
 
-echo '<p>', $url_path_clean, '</p>';
+echo '<h2>', $url_path_clean, '</h2>';
 
-echo '<table>';
+echo '<table class="table table-condensed">';
 
 echo '<thead>';
 echo '<tr><th>Name</th><th>Last Modified</th><th>Size</th></tr>';
