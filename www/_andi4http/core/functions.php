@@ -10,6 +10,19 @@ function andi_write_text_file($path, $heredoc_content) {
 	file_put_contents($path, str_replace("\t", '', $heredoc_content) . "\n");
 }
 
+function andi_format_size($size) {
+	if ($size >= 1073741824) {
+		return floor($size/10737418.24)/100 . ' GB';
+	} else if ($size >= 1048576) {
+		return floor($size/10485.76)/100 . ' MB';
+	} else if ($size >= 1024) {
+		return floor($size/10.24)/100 . ' KB';
+	} else if ($size == 1) {
+		return $size . ' byte';
+	}
+	return $size . ' bytes';
+}
+
 function andi_list_directory($local_path, $dir_callback, $file_callback) {
 	$handle = opendir($local_path);
 	if ($handle) {

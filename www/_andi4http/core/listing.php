@@ -46,7 +46,7 @@ andi_list_directory($local_path, function($entry, $path) {
 	echo '<tr>';
 	echo '<td><a href="', rawurlencode($entry), '">', $entry, '</a></td>';
 	echo '<td>', date('d-m-Y H:i:s', filemtime($path)), '</td>';
-	echo '<td>', filesize($path), '</td>';
+	echo '<td>', andi_format_size(filesize($path)), '</td>';
 	echo '</tr>';
 });
 
