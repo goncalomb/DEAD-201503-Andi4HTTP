@@ -24,13 +24,14 @@ function andi_format_size($size) {
 }
 
 function andi_list_directory($local_path, $dir_callback, $file_callback) {
+	global $config;
 	$handle = opendir($local_path);
 	if ($handle) {
 		$folders = array();
 		$files = array();
 
 		while (($entry = readdir($handle)) !== false) {
-			if ($entry != '.' && $entry != '..' && $entry[0] != '.' && !in_array($entry, array('_andi4http', 'index.php', 'header.html', 'footer.html'))) {
+			if ($entry != '.' && $entry != '..' && $entry[0] != '.' && !in_array($entry, $config['exclude-entries'])) {
 				$path = $local_path . DIRECTORY_SEPARATOR . $entry;
 				if (is_dir($path)) {
 					$folders[$entry] = $path;

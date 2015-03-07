@@ -7,6 +7,7 @@ define('ANDI_DIR', realpath(__DIR__ . DIRECTORY_SEPARATOR . '..'));
 define('ANDI_ROOT_DIR', realpath(ANDI_DIR . DIRECTORY_SEPARATOR . '..'));
 define('ANDI_CORE_DIR', __DIR__);
 define('ANDI_GLOBAL_DIR', ANDI_DIR . DIRECTORY_SEPARATOR . 'global');
+define('ANDI_CONFIG_FILE', ANDI_DIR . DIRECTORY_SEPARATOR . 'config.php');
 
 // Process the URL.
 $i = strpos($_SERVER['REQUEST_URI'], '?');
@@ -70,5 +71,9 @@ EOF
 	);
 }
 unset($internal_htacces_file);
+
+// Load config file.
+$config = array();
+require ANDI_CONFIG_FILE;
 
 ?>

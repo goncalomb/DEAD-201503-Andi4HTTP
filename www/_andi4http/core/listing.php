@@ -27,7 +27,15 @@ if (is_file($local_header_path)) {
 echo '<table class="table table-condensed">';
 
 echo '<thead>';
-echo '<tr><th>Name</th><th>Last Modified</th><th>Size</th></tr>';
+echo '<tr>';
+echo '<th>Name</th>';
+if ($config['show-mtime']) {
+	echo '<th>Last Modified</th>';
+}
+if ($config['show-size']) {
+	echo '<th>Size</th>';
+}
+echo '</tr>';
 echo '</thead>';
 
 echo '<tbody>';
@@ -37,16 +45,30 @@ if (count($url_path_parts)) {
 }
 
 andi_list_directory($local_path, function($entry, $path) {
+	global $config;
 	echo '<tr>';
 	echo '<td><a href="', rawurlencode($entry), '/">', $entry, '/</a></td>';
-	echo '<td>', date('d-m-Y H:i:s', filemtime($path)), '</td>';
-	echo '<td>-</td>';
+	if ($config['show-mtime']) {
+		if ($config['show-mtime-dir']) {
+			echo '<td>', date($config['date-format'], filemtime($path)), '</td>';
+		} else {
+			echo '<td>-</td>';
+		}
+	}
+	if ($config['show-size']) {
+		echo '<td>-</td>';
+	}
 	echo '</tr>';
 }, function($entry, $path) {
+	global $config;
 	echo '<tr>';
 	echo '<td><a href="', rawurlencode($entry), '">', $entry, '</a></td>';
-	echo '<td>', date('d-m-Y H:i:s', filemtime($path)), '</td>';
-	echo '<td>', andi_format_size(filesize($path)), '</td>';
+	if ($config['show-mtime']) {
+		echo '<td>', date($config['date-format'], filemtime($path)), '</td>';
+	}
+	if ($config['show-size']) {
+		echo '<td>', andi_format_size(filesize($path)), '</td>';
+	}
 	echo '</tr>';
 });
 
