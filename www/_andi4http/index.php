@@ -63,15 +63,19 @@ echo '<html>';
 echo '<head>';
 echo '<meta charset="utf-8">';
 echo '<title>', $url_path_clean, '</title>';
+echo '<style>body { font-family: monospace; }</style>';
 echo '</head>';
 echo '<body>';
 
-echo '<pre>';
+echo '<p>', $url_path_clean, '</p>';
 
-echo $url_path_clean, "\n";
-echo $local_path, "\n";
+echo '<table>';
 
-echo "\n";
+echo '<thead>';
+echo '<tr><th>Name</th><th>Last Modified</th><th>Size</th></tr>';
+echo '</thead>';
+
+echo '<tbody>';
 
 $handle = opendir($local_path);
 if ($handle) {
@@ -79,7 +83,7 @@ if ($handle) {
 	$files = array();
 
 	while (($entry = readdir($handle)) !== false) {
-		if ($entry != '.' && $entry != '..' && $entry[0] != '.' && $entry != '_andi4http') {
+		if ($entry != '.' && $entry != '..' && $entry[0] != '.' && $entry != '_andi4http' && $entry != 'index.php') {
 			$path = $local_path . DIRECTORY_SEPARATOR . $entry;
 			if (is_dir($path)) {
 				$folders[$entry] = $path;
@@ -100,22 +104,29 @@ if ($handle) {
 	ksort($files);
 
 	if (count($url_path_parts)) {
-		echo "<a href=\"..\">../</a>\n";
+		echo '<tr><td><a href="..">../</a></td></tr>';
 	}
 	foreach ($folders as $entry => $path) {
-		echo '<a href="', rawurlencode($entry), '/">', $entry, "/</a>\n";
+		echo '<tr>';
+		echo '<td><a href="', rawurlencode($entry), '/">', $entry, '/</a></td>';
+		echo '<td>', date('d-m-Y H:i:s', filemtime($path)), '</td>';
+		echo '<td>-</td>';
+		echo '</tr>';
 	}
 	foreach ($files as $entry => $path) {
-		if ($entry != 'index.php') {
-			echo '<a href="', rawurlencode($entry), '">', $entry, "</a>\n";
-		}
+		echo '<tr>';
+		echo '<td><a href="', rawurlencode($entry), '">', $entry, '</a></td>';
+		echo '<td>', date('d-m-Y H:i:s', filemtime($path)), '</td>';
+		echo '<td>', filesize($path), '</td>';
+		echo '</tr>';
 	}
 	closedir($handle);
 }
 
-echo "\nPowered by Andi 4 HTTP (A neat directory index for HTTP).\n";
+echo '</tbody>';
+echo '</table>';
 
-echo '</pre>';
+echo '<p>Powered by Andi 4 HTTP (A neat directory index for HTTP).</p>';
 
 echo '</body>';
 echo '</html>';
