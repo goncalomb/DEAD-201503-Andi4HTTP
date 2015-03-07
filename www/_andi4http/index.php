@@ -68,7 +68,7 @@ echo '<style>body { width: 750px; margin: 20px auto; }</style>';
 echo '</head>';
 echo '<body>';
 
-echo '<h2>', $url_path_clean, '</h2>';
+require andi_build_dir_path(__DIR__, 'global', 'header.php');
 
 echo '<table class="table table-condensed">';
 
@@ -127,7 +127,7 @@ if ($handle) {
 echo '</tbody>';
 echo '</table>';
 
-echo '<p>Powered by Andi 4 HTTP (A neat directory index for HTTP).</p>';
+require andi_build_dir_path(__DIR__, 'global', 'footer.php');
 
 echo '</body>';
 echo '</html>';
