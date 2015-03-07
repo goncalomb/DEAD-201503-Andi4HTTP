@@ -70,6 +70,13 @@ echo '<body>';
 
 require andi_build_dir_path(__DIR__, 'global', 'header.php');
 
+$local_header_path = andi_build_dir_path($local_path, 'header.html');
+$local_footer_path = andi_build_dir_path($local_path, 'footer.html');
+
+if (is_file($local_header_path)) {
+	echo file_get_contents($local_header_path);
+}
+
 echo '<table class="table table-condensed">';
 
 echo '<thead>';
@@ -84,7 +91,7 @@ if ($handle) {
 	$files = array();
 
 	while (($entry = readdir($handle)) !== false) {
-		if ($entry != '.' && $entry != '..' && $entry[0] != '.' && $entry != '_andi4http' && $entry != 'index.php') {
+		if ($entry != '.' && $entry != '..' && $entry[0] != '.' && !in_array($entry, array('_andi4http', 'index.php', 'header.html', 'footer.html'))) {
 			$path = $local_path . DIRECTORY_SEPARATOR . $entry;
 			if (is_dir($path)) {
 				$folders[$entry] = $path;
@@ -126,6 +133,10 @@ if ($handle) {
 
 echo '</tbody>';
 echo '</table>';
+
+if (is_file($local_footer_path)) {
+	echo file_get_contents($local_footer_path);
+}
 
 require andi_build_dir_path(__DIR__, 'global', 'footer.php');
 
