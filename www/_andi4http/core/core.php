@@ -1,6 +1,7 @@
 <?php
 
 require __DIR__ . DIRECTORY_SEPARATOR . 'functions.php';
+require __DIR__ . DIRECTORY_SEPARATOR . 'functions-html.php';
 
 // Some constants.
 define('ANDI_DIR', realpath(__DIR__ . DIRECTORY_SEPARATOR . '..'));
