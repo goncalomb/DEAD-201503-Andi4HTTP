@@ -2,6 +2,7 @@
 
 $config['date-format'] = 'd-m-Y H:i:s';
 
+$config['show-mimetype'] = false;
 $config['show-mtime'] = true;
 $config['show-mtime-dir'] = true;
 $config['show-size'] = true;
