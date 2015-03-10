@@ -2,6 +2,8 @@
 
 $config['date-format'] = 'd-m-Y H:i:s';
 
+$config['json-api'] = true;
+
 $config['show-mimetype'] = false;
 $config['show-mtime'] = true;
 $config['show-mtime-dir'] = true;
