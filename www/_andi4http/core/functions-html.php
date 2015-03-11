@@ -84,7 +84,7 @@ function andi_html_main_table($table_class='') {
 			echo '<td>', andi_format_size(filesize($path)), '</td>';
 		}
 		echo '</tr>';
-	});
+	}, $config['exclude-entries']);
 
 	if ($finfo) {
 		finfo_close($finfo);

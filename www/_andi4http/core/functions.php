@@ -23,7 +23,7 @@ function andi_format_size($size) {
 	return $size . ' bytes';
 }
 
-function andi_list_directory($local_path, $dir_callback, $file_callback) {
+function andi_list_directory($local_path, $dir_callback, $file_callback, $exclude_entries=array()) {
 	global $config;
 	$handle = opendir($local_path);
 	if ($handle) {
@@ -31,7 +31,7 @@ function andi_list_directory($local_path, $dir_callback, $file_callback) {
 		$files = array();
 
 		while (($entry = readdir($handle)) !== false) {
-			if ($entry != '.' && $entry != '..' && $entry[0] != '.' && !in_array($entry, $config['exclude-entries'])) {
+			if ($entry != '.' && $entry != '..' && $entry[0] != '.' && !in_array($entry, $exclude_entries)) {
 				$path = $local_path . DIRECTORY_SEPARATOR . $entry;
 				if (is_dir($path)) {
 					$folders[$entry] = $path;

@@ -30,7 +30,7 @@ if (isset($_GET['json']) && $config['json-api']) {
 			'mtime' => filemtime($path),
 			'size' => filesize($path)
 		);
-	});
+	}, $config['exclude-entries']);
 
 	header('Content-Type: application/json');
 	echo json_encode($data, JSON_PRETTY_PRINT);
