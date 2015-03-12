@@ -21,3 +21,9 @@ The 'global' directory (DO edit)
 --------------------------------
 
 Contains the global PHP templates for the header and footer, shown on every directory.
+
+The 'themes' directory (DO edit)
+--------------------------------
+
+The themes directory, put your themes here. Or just use the default ones.
+Choose your theme on the `config.php` file.

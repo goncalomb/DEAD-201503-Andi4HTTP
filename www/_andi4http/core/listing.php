@@ -37,23 +37,27 @@ if (isset($_GET['json']) && $config['json-api']) {
 	exit();
 }
 
-echo "<!DOCTYPE html>\n";
-echo '<html>';
-echo '<head>';
-echo '<meta charset="utf-8">';
-echo '<link href="//cdn.jsdelivr.net/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" type="text/css">';
-echo '<title>Index of ', $url_path_clean, '</title>';
-echo '<style>body { width: 750px; margin: 20px auto; }</style>';
-echo '</head>';
-echo '<body>';
+$theme_file = andi_build_dir_path(ANDI_THEMES_DIR, $config['theme'], 'listing.php');
+if ($config['theme'] != 'default' && is_file($theme_file)) {
+	require $theme_file;
+} else {
+	echo "<!DOCTYPE html>\n";
+	echo '<html>';
+	echo '<head>';
+	echo '<meta charset="utf-8">';
+	echo '<title>Index of ', $url_path_clean, '</title>';
+	echo '<style>body { font-family: Arial; max-width: 750px; margin: 20px auto; padding: 0 20px; } table { width: 100%; border-spacing: 0; border-collapse: collapse; } table thead th { border-bottom: 2px solid #d2d2d2; } table td { padding: 5px; border-bottom: 1px solid #d2d2d2; }</style>';
+	echo '</head>';
+	echo '<body>';
 
-andi_html_header();
-andi_html_main_table('table table-condensed');
-andi_html_footer();
+	andi_html_header();
+	andi_html_main_table();
+	andi_html_footer();
 
-echo '</body>';
-echo '</html>';
+	echo '</body>';
+	echo '</html>';
 
-echo "\n";
+	echo "\n";
+}
 
 ?>

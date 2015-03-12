@@ -1,5 +1,13 @@
 <?php
 
+// Theme name.
+$config['theme'] = 'bootstrap';
+// Theme config, themes may have special configs.
+$config['theme-config'] = array(
+	// Bootstap theme, you can pick a Bootswatch theme.
+	// 'bootswatch' => 'readable'
+);
+
 // Date format ('http://php.net/manual/en/function.date.php).
 $config['date-format'] = 'd-m-Y H:i:s';
 
