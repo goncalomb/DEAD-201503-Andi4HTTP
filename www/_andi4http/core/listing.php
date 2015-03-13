@@ -46,7 +46,29 @@ if ($config['theme'] != 'default' && is_file($theme_file)) {
 	echo '<head>';
 	echo '<meta charset="utf-8">';
 	echo '<title>Index of ', $url_path_clean, '</title>';
-	echo '<style>body { font-family: Arial; max-width: 750px; margin: 20px auto; padding: 0 20px; } table { width: 100%; border-spacing: 0; border-collapse: collapse; } table thead th { border-bottom: 2px solid #d2d2d2; } table td { padding: 5px; border-bottom: 1px solid #d2d2d2; }</style>';
+	echo '<style>
+body {
+	font-family: monospace;
+	font-size: 1.25em;
+	max-width: 750px;
+	margin: 20px auto;
+	padding: 0 20px;
+}
+table {
+	width: 100%;
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+table thead th {
+	padding: 5px;
+	border-bottom: 2px solid #d2d2d2;
+	text-align: left;
+}
+table td {
+	padding: 5px;
+	border-bottom: 1px solid #d2d2d2;
+}
+</style>';
 	echo '</head>';
 	echo '<body>';
 
