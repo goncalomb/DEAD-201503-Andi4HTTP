@@ -1,9 +1,5 @@
 <?php
 
-$theme_config = array_merge($config['theme-config'], array(
-	'boo'
-));
-
 echo "<!DOCTYPE html>\n";
 echo '<html>';
 echo '<head>';
