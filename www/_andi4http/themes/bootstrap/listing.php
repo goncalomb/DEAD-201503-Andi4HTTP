@@ -19,7 +19,7 @@ if (isset($config['theme-config']['bootswatch']) && in_array($config['theme-conf
 	echo '<link href="//cdn.jsdelivr.net/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" type="text/css">';
 }
 
-echo '<title>Index of ', $url_path_clean, '</title>';
+echo andi_html_title_tag();
 echo '<style>body { max-width: 750px; margin: 20px auto; padding: 0 20px; }</style>';
 echo '</head>';
 echo '<body>';

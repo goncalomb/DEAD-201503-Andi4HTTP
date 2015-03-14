@@ -45,7 +45,7 @@ if ($config['theme'] != 'default' && is_file($theme_file)) {
 	echo '<html>';
 	echo '<head>';
 	echo '<meta charset="utf-8">';
-	echo '<title>Index of ', $url_path_clean, '</title>';
+	echo andi_html_title_tag();
 	echo '<style>
 body {
 	font-family: monospace;

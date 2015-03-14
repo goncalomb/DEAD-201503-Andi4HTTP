@@ -1,5 +1,10 @@
 <?php
 
+function andi_html_title_tag() {
+	global $config;
+	return '<title>' . $config['title-callback']() . '</title>';
+}
+
 function andi_html_header() {
 	global $local_path;
 	// Global header.
