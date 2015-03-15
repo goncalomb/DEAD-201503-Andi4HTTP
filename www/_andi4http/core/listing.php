@@ -5,7 +5,7 @@ ini_set('display_errors', 1);
 
 require __DIR__ . DIRECTORY_SEPARATOR . 'core.php';
 
-if (isset($_GET['json']) && $config['json-api']) {
+if (isset($_GET['json']) && Andi::config('json-api')) {
 	// JSON api.
 	$host = $_SERVER['HTTP_HOST'];
 	$query = $_SERVER['QUERY_STRING'];
@@ -30,15 +30,15 @@ if (isset($_GET['json']) && $config['json-api']) {
 			'mtime' => filemtime($path),
 			'size' => filesize($path)
 		);
-	}, $config['exclude-entries']);
+	}, Andi::config('exclude-entries'));
 
 	header('Content-Type: application/json');
 	echo json_encode($data, JSON_PRETTY_PRINT);
 	exit();
 }
 
-$theme_file = andi_build_dir_path(ANDI_THEMES_DIR, $config['theme'], 'listing.php');
-if ($config['theme'] != 'default' && is_file($theme_file)) {
+$theme_file = andi_build_dir_path(ANDI_THEMES_DIR, Andi::config('theme'), 'listing.php');
+if (Andi::config('theme') != 'default' && is_file($theme_file)) {
 	require $theme_file;
 } else {
 	echo "<!DOCTYPE html>\n";

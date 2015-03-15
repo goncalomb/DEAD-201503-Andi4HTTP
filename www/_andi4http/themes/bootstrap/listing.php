@@ -5,7 +5,9 @@ echo '<html>';
 echo '<head>';
 echo '<meta charset="utf-8">';
 
-if (isset($config['theme-config']['bootswatch']) && in_array($config['theme-config']['bootswatch'], array(
+$bootswatch_theme = Andi::config('theme-config', 'bootswatch');
+
+if ($bootswatch_theme && in_array($bootswatch_theme, array(
 	'amelia',
 	'cerulean', 'cosmo', 'cyborg',
 	'darkly', 'flatly', 'journal',
@@ -14,7 +16,7 @@ if (isset($config['theme-config']['bootswatch']) && in_array($config['theme-conf
 	'spacelab', 'superhero','united',
 	'yeti'
 ))) {
-	echo '<link href="//cdn.jsdelivr.net/bootswatch/3.3.2/', $config['theme-config']['bootswatch'], '/bootstrap.min.css" rel="stylesheet" type="text/css">';
+	echo '<link href="//cdn.jsdelivr.net/bootswatch/3.3.2/', $bootswatch_theme, '/bootstrap.min.css" rel="stylesheet" type="text/css">';
 } else {
 	echo '<link href="//cdn.jsdelivr.net/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" type="text/css">';
 }

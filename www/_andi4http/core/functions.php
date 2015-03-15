@@ -24,7 +24,6 @@ function andi_format_size($size) {
 }
 
 function andi_list_directory($local_path, $dir_callback, $file_callback, $exclude_entries=array()) {
-	global $config;
 	$handle = opendir($local_path);
 	if ($handle) {
 		$folders = array();

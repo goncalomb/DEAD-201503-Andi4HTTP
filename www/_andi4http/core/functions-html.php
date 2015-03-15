@@ -1,8 +1,8 @@
 <?php
 
 function andi_html_title_tag() {
-	global $config;
-	return '<title>' . $config['title-callback']() . '</title>';
+	$title_callback = Andi::config('title-callback');
+	return '<title>' . $title_callback() . '</title>';
 }
 
 function andi_html_header() {
@@ -28,24 +28,24 @@ function andi_html_footer() {
 }
 
 function andi_html_main_table($table_class='') {
-	global $config, $url_path_parts, $local_path;
+	global $url_path_parts, $local_path;
 	echo '<table class="', $table_class, '">';
 
 	$finfo = null;
-	if ($config['show-mimetype']) {
+	if (Andi::config('show-mimetype')) {
 		$finfo = finfo_open(FILEINFO_MIME_TYPE | FILEINFO_PRESERVE_ATIME);
 	}
 
 	echo '<thead>';
 	echo '<tr>';
 	echo '<th>Name</th>';
-	if ($config['show-mimetype'] && $finfo) {
+	if (Andi::config('show-mimetype') && $finfo) {
 		echo '<th>MIME Type</th>';
 	}
-	if ($config['show-mtime']) {
+	if (Andi::config('show-mtime')) {
 		echo '<th>Last Modified</th>';
 	}
-	if ($config['show-size']) {
+	if (Andi::config('show-size')) {
 		echo '<th>Size</th>';
 	}
 	echo '</tr>';
@@ -58,38 +58,36 @@ function andi_html_main_table($table_class='') {
 	}
 
 	andi_list_directory($local_path, function($entry, $path) use ($finfo) {
-		global $config;
 		echo '<tr>';
 		echo '<td><a href="', rawurlencode($entry), '/">', $entry, '/</a></td>';
-		if ($config['show-mimetype'] && $finfo) {
+		if (Andi::config('show-mimetype') && $finfo) {
 			echo '<td>-</td>';
 		}
-		if ($config['show-mtime']) {
-			if ($config['show-mtime-dir']) {
-				echo '<td>', date($config['date-format'], filemtime($path)), '</td>';
+		if (Andi::config('show-mtime')) {
+			if (Andi::config('show-mtime-dir')) {
+				echo '<td>', date(Andi::config('date-format'), filemtime($path)), '</td>';
 			} else {
 				echo '<td>-</td>';
 			}
 		}
-		if ($config['show-size']) {
+		if (Andi::config('show-size')) {
 			echo '<td>-</td>';
 		}
 		echo '</tr>';
 	}, function($entry, $path) use ($finfo) {
-		global $config;
 		echo '<tr>';
 		echo '<td><a href="', rawurlencode($entry), '">', $entry, '</a></td>';
-		if ($config['show-mimetype'] && $finfo) {
+		if (Andi::config('show-mimetype') && $finfo) {
 			echo '<td>', finfo_file($finfo, $path), '</td>';
 		}
-		if ($config['show-mtime']) {
-			echo '<td>', date($config['date-format'], filemtime($path)), '</td>';
+		if (Andi::config('show-mtime')) {
+			echo '<td>', date(Andi::config('date-format'), filemtime($path)), '</td>';
 		}
-		if ($config['show-size']) {
+		if (Andi::config('show-size')) {
 			echo '<td>', andi_format_size(filesize($path)), '</td>';
 		}
 		echo '</tr>';
-	}, $config['exclude-entries']);
+	}, Andi::config('exclude-entries'));
 
 	if ($finfo) {
 		finfo_close($finfo);

@@ -11,6 +11,13 @@ define('ANDI_GLOBAL_DIR', ANDI_DIR . DIRECTORY_SEPARATOR . 'global');
 define('ANDI_THEMES_DIR', ANDI_DIR . DIRECTORY_SEPARATOR . 'themes');
 define('ANDI_CONFIG_FILE', ANDI_DIR . DIRECTORY_SEPARATOR . 'config.php');
 
+// Class autoloader.
+spl_autoload_register(function($class_name) {
+	require __DIR__ . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . 'class.' .  $class_name . '.php';
+});
+
+Andi::initialize();
+
 // Process the URL.
 $i = strpos($_SERVER['REQUEST_URI'], '?');
 $url_path = ($i !== false ? substr($_SERVER['REQUEST_URI'], 0, $i) : $_SERVER['REQUEST_URI']);
@@ -73,9 +80,5 @@ EOF
 	);
 }
 unset($internal_htacces_file);
-
-// Load config file.
-$config = array();
-require ANDI_CONFIG_FILE;
 
 ?>
