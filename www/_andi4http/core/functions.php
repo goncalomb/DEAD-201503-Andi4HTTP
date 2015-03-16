@@ -6,8 +6,10 @@ function andi_build_dir_path() {
 	}, func_get_args()));
 }
 
-function andi_write_text_file($path, $heredoc_content) {
-	file_put_contents($path, str_replace("\t", '', $heredoc_content) . "\n");
+function andi_write_htaccess($path, $content, $override=false) {
+	if ($override || !is_file($path)) {
+		file_put_contents($path, ltrim($content));
+	}
 }
 
 function andi_format_size($size) {

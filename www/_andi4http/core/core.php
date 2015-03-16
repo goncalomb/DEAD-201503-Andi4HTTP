@@ -36,49 +36,35 @@ $local_path = andi_build_dir_path(ANDI_ROOT_DIR, $url_path_parts);
 // $local_path     = Filesystem path that maps to the requested URL
 
 // Create main .htaccess that lives on the root directory.
-$main_htaccess_file = ANDI_ROOT_DIR . DIRECTORY_SEPARATOR . '.htaccess';
-if (!is_file($main_htaccess_file)) {
-	andi_write_text_file($main_htaccess_file, <<<EOF
-		ServerSignature Off
-		DirectoryIndex /_andi4http/core/listing.php
-		DirectorySlash On
-		AcceptPathInfo Off
-		RewriteEngine On
-		Options -MultiViews -Indexes -Includes -ExecCGI +FollowSymLinks
+andi_write_htaccess(ANDI_ROOT_DIR . DIRECTORY_SEPARATOR . '.htaccess', '
+ServerSignature Off
+DirectoryIndex /_andi4http/core/listing.php
+DirectorySlash On
+AcceptPathInfo Off
+RewriteEngine On
+Options -MultiViews -Indexes -Includes -ExecCGI +FollowSymLinks
 
-		AddDefaultCharset utf-8
-		AddCharset utf-8 .js .css
+AddDefaultCharset utf-8
+AddCharset utf-8 .js .css
 
-		RewriteCond %{ENV:REDIRECT_STATUS} !^.
-		RewriteCond %{REQUEST_FILENAME} -f
-		RewriteCond %{REQUEST_URI} (.*/)index\.php$
-		RewriteRule .? %1 [R=301,L]
-EOF
-	);
-}
-unset($main_htaccess_file);
+RewriteCond %{ENV:REDIRECT_STATUS} !^.
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteCond %{REQUEST_URI} (.*/)index\.php$
+RewriteRule .? %1 [R=301,L]
+');
 
 // TODO: Use less .htaccess files?
 
 // Create internal .htaccess, it controls the access to the _andi4http directory.
-$internal_htacces_file = ANDI_DIR . DIRECTORY_SEPARATOR . '.htaccess';
-if (!is_file($internal_htacces_file)) {
-	andi_write_text_file($internal_htacces_file, <<<EOF
-		Order Deny,Allow
-		Deny from all
-EOF
-	);
-}
-$internal_htacces_file = ANDI_CORE_DIR . DIRECTORY_SEPARATOR . '.htaccess';
-if (!is_file($internal_htacces_file)) {
-	andi_write_text_file($internal_htacces_file, <<<EOF
-		<Files listing.php>
-			Order Allow,Deny
-			Allow from all
-		</Files>
-EOF
-	);
-}
-unset($internal_htacces_file);
+andi_write_htaccess(ANDI_DIR . DIRECTORY_SEPARATOR . '.htaccess', '
+Order Deny,Allow
+Deny from all
+');
+andi_write_htaccess(ANDI_CORE_DIR . DIRECTORY_SEPARATOR . '.htaccess', '
+<Files listing.php>
+	Order Allow,Deny
+	Allow from all
+</Files>
+');
 
 ?>
