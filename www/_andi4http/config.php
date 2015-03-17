@@ -31,8 +31,7 @@ $config['exclude-entries'] = array(
 
 // Title callback.
 $config['title-callback'] = function() {
-	global $url_path_clean;
-	return 'Index of ' . $url_path_clean;
+	return 'Index of ' . Andi::urlPath();
 }
 
 ?>

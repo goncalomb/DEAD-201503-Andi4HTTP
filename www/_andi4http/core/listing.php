@@ -7,25 +7,27 @@ require __DIR__ . DIRECTORY_SEPARATOR . 'core.php';
 
 if (isset($_GET['json']) && Andi::config('json-api')) {
 	// JSON api.
+	$url_path = Andi::urlPath();
+
 	$host = $_SERVER['HTTP_HOST'];
 	$query = $_SERVER['QUERY_STRING'];
 	$data = array(
-		'url' => "{$host}{$url_path_clean}?{$query}",
+		'url' => "{$host}{$url_path}?{$query}",
 		'entries' => array(),
 		'version' => 0
 	);
 
-	andi_list_directory($local_path, function($entry, $path) use ($url_path_clean, $host, $query, &$data) {
+	andi_list_directory(Andi::localPath(), function($entry, $path) use ($url_path, $host, $query, &$data) {
 		$data['entries'][] = array(
 			'name' => $entry,
-			'url' => "{$host}{$url_path_clean}{$entry}/?{$query}",
+			'url' => "{$host}{$url_path}{$entry}/?{$query}",
 			'type' => 'dir',
 			'mtime' => filemtime($path)
 		);
-	}, function($entry, $path) use ($url_path_clean, $host, $query, &$data) {
+	}, function($entry, $path) use ($url_path, $host, $query, &$data) {
 		$data['entries'][] = array(
 			'name' => $entry,
-			'url' => "{$host}{$url_path_clean}{$entry}",
+			'url' => "{$host}{$url_path}{$entry}",
 			'type' => 'file',
 			'mtime' => filemtime($path),
 			'size' => filesize($path)

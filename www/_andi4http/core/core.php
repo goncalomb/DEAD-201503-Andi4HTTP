@@ -18,23 +18,6 @@ spl_autoload_register(function($class_name) {
 
 Andi::initialize();
 
-// Process the URL.
-$i = strpos($_SERVER['REQUEST_URI'], '?');
-$url_path = ($i !== false ? substr($_SERVER['REQUEST_URI'], 0, $i) : $_SERVER['REQUEST_URI']);
-unset($i);
-$url_path_clean = preg_replace('/\/{2,}/', '/', $url_path);
-$url_path_parts = array_map('rawurldecode', explode('/', trim($url_path_clean, '/')));
-if (count($url_path_parts) == 1 && $url_path_parts[0] == '') {
-	$url_path_parts = array();
-}
-$local_path = andi_build_dir_path(ANDI_ROOT_DIR, $url_path_parts);
-// TODO: This only works if the root of the domain is the same as the root for the listing.
-// These variables exist is the global scope:
-// $url_path       = Requested URL
-// $url_path_clean = Requested URL without duplicate slashes
-// $url_path_parts = Array with clean URL parts
-// $local_path     = Filesystem path that maps to the requested URL
-
 // Create main .htaccess that lives on the root directory.
 andi_write_htaccess(ANDI_ROOT_DIR . DIRECTORY_SEPARATOR . '.htaccess', '
 ServerSignature Off
