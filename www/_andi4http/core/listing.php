@@ -43,12 +43,8 @@ $theme_file = andi_build_dir_path(ANDI_THEMES_DIR, Andi::config('theme'), 'listi
 if (Andi::config('theme') != 'default' && is_file($theme_file)) {
 	require $theme_file;
 } else {
-	echo "<!DOCTYPE html>\n";
-	echo '<html>';
-	echo '<head>';
-	echo '<meta charset="utf-8">';
-	echo andi_html_title_tag();
-	echo '<style>
+	AndiHtml::start();
+	AndiHtml::appendToHead('<style>
 body {
 	font-family: monospace;
 	font-size: 1.25em;
@@ -70,18 +66,13 @@ table td {
 	padding: 5px;
 	border-bottom: 1px solid #d2d2d2;
 }
-</style>';
-	echo '</head>';
-	echo '<body>';
+</style>');
 
 	andi_html_header();
 	andi_html_main_table();
 	andi_html_footer();
 
-	echo '</body>';
-	echo '</html>';
-
-	echo "\n";
+	AndiHtml::end();
 }
 
 ?>
