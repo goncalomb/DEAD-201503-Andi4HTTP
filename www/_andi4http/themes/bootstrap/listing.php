@@ -13,9 +13,9 @@ if ($bootswatch_theme && in_array($bootswatch_theme, array(
 	'spacelab', 'superhero','united',
 	'yeti'
 ))) {
-	AndiHtml::appendToHead('<link href="//cdn.jsdelivr.net/bootswatch/3.3.2/', $bootswatch_theme, '/bootstrap.min.css" rel="stylesheet" type="text/css">');
+	AndiHtml::addCssFile('//cdn.jsdelivr.net/bootswatch/3.3.2/', $bootswatch_theme, '/bootstrap.min.css');
 } else {
-	AndiHtml::appendToHead('<link href="//cdn.jsdelivr.net/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" type="text/css">');
+	AndiHtml::addCssFile('//cdn.jsdelivr.net/bootstrap/3.3.2/css/bootstrap.min.css');
 }
 
 AndiHtml::appendToHead('<style>body { max-width: 750px; margin: 20px auto; padding: 0 20px; }</style>');
