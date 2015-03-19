@@ -5,24 +5,20 @@ function andi_html_title_tag() {
 	return '<title>' . $title_callback() . '</title>';
 }
 
-function andi_html_header() {
-	// Global header.
-	require andi_build_dir_path(ANDI_GLOBAL_DIR, 'header.php');
-	// Local header.
-	$local_header_path = andi_build_dir_path(Andi::localPath(), 'header.html');
-	if (is_file($local_header_path)) {
-		echo file_get_contents($local_header_path);
-	}
+function andi_html_header_global() {
+	andi_require_if_exists(ANDI_GLOBAL_DIR . DIRECTORY_SEPARATOR . 'header.php');
 }
 
-function andi_html_footer() {
-	// Local footer.
-	$local_footer_path = andi_build_dir_path(Andi::localPath(), 'footer.html');
-	if (is_file($local_footer_path)) {
-		echo file_get_contents($local_footer_path);
-	}
-	// Global footer.
-	require andi_build_dir_path(ANDI_GLOBAL_DIR, 'footer.php');
+function andi_html_header_local() {
+	andi_require_if_exists(Andi::localPath() . DIRECTORY_SEPARATOR . 'header.html');
+}
+
+function andi_html_footer_global() {
+	andi_require_if_exists(ANDI_GLOBAL_DIR . DIRECTORY_SEPARATOR . 'footer.php');
+}
+
+function andi_html_footer_local() {
+	andi_require_if_exists(Andi::localPath() . DIRECTORY_SEPARATOR . 'footer.html');
 }
 
 function andi_html_main_table($table_class='') {

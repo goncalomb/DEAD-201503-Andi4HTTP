@@ -12,6 +12,12 @@ function andi_write_htaccess($path, $content, $override=false) {
 	}
 }
 
+function andi_require_if_exists($path) {
+	if (is_file($path)) {
+		return require $path;
+	}
+}
+
 function andi_format_size($size) {
 	if ($size >= 1073741824) {
 		return floor($size/10737418.24)/100 . ' GB';

@@ -68,9 +68,11 @@ table td {
 }
 </style>');
 
-	andi_html_header();
+	andi_html_header_global();
+	andi_html_header_local();
 	andi_html_main_table();
-	andi_html_footer();
+	andi_html_footer_local();
+	andi_html_footer_global();
 
 	AndiHtml::end();
 }

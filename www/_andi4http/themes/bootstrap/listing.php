@@ -20,9 +20,11 @@ if ($bootswatch_theme && in_array($bootswatch_theme, array(
 
 AndiHtml::appendToHead('<style>body { max-width: 750px; margin: 20px auto; padding: 0 20px; }</style>');
 
-andi_html_header();
+andi_html_header_global();
+andi_html_header_local();
 andi_html_main_table('table table-condensed');
-andi_html_footer();
+andi_html_footer_local();
+andi_html_footer_global();
 
 AndiHtml::end();
 
