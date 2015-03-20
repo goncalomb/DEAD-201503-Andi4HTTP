@@ -1,5 +1,13 @@
 <?php
 
+// Time constants.
+define('ANDI_MICROTIME', (
+	isset($_SERVER['REQUEST_TIME_FLOAT']) ?
+	(float) $_SERVER['REQUEST_TIME_FLOAT'] :
+	microtime(true)
+));
+define('ANDI_TIME', floor(ANDI_MICROTIME));
+
 require __DIR__ . DIRECTORY_SEPARATOR . 'functions.php';
 require __DIR__ . DIRECTORY_SEPARATOR . 'functions-html.php';
 

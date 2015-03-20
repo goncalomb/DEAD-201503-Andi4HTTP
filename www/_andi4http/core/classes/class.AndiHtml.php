@@ -50,6 +50,10 @@ final class AndiHtml {
 		echo '</html>';
 
 		echo "\n";
+
+		echo '<!-- ';
+		echo '~', floor((microtime(true) - ANDI_MICROTIME)*100000)/100, 'ms';
+		echo " -->\n";
 		exit();
 	}
 
