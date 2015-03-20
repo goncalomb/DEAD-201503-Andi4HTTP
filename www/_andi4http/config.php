@@ -29,9 +29,4 @@ $config['exclude-entries'] = array(
 	'footer.html'
 );
 
-// Title callback.
-$config['title-callback'] = function() {
-	return 'Index of ' . Andi::urlPath();
-}
-
 ?>

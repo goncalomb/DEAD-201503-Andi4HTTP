@@ -39,12 +39,14 @@ if (isset($_GET['json']) && Andi::config('json-api')) {
 	exit();
 }
 
-$theme_file = andi_build_dir_path(ANDI_THEMES_DIR, Andi::config('theme'), 'listing.php');
-if (Andi::config('theme') != 'default' && is_file($theme_file)) {
+$theme = strtolower(Andi::config('theme'));
+$theme_file = andi_build_dir_path(ANDI_THEMES_DIR, $theme, 'listing.php');
+if ($theme != 'default' && $theme != 'plain' && is_file($theme_file)) {
 	require $theme_file;
 } else {
 	AndiHtml::start();
-	AndiHtml::appendToHead('<style>
+	if ($theme != 'plain') {
+		AndiHtml::appendToHead('<style>
 body {
 	font-family: monospace;
 	font-size: 1.25em;
@@ -67,12 +69,9 @@ table td {
 	border-bottom: 1px solid #d2d2d2;
 }
 </style>');
+	}
 
-	andi_html_header_global();
-	andi_html_header_local();
-	andi_html_main_table();
-	andi_html_footer_local();
-	andi_html_footer_global();
+	andi_html_all();
 
 	AndiHtml::end();
 }

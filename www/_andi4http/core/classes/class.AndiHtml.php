@@ -4,10 +4,12 @@ final class AndiHtml {
 
 	private static $_cssFiles = array();
 	private static $_jsFiles = array();
+	private static $_title;
 	private static $_headExtra = array();
 
 	public static function start() {
 		ob_start();
+		self::$_title = 'Index of ' . Andi::urlPath();
 	}
 
 	public static function addCssFile($href) {
@@ -16,6 +18,10 @@ final class AndiHtml {
 
 	public static function addJsFile($src) {
 		self::$_jsFiles[] = $src;
+	}
+
+	public static function setTitle($title) {
+		self::$_title = $title;
 	}
 
 	public static function appendToHead($code) {
@@ -37,7 +43,7 @@ final class AndiHtml {
 		foreach (self::$_jsFiles as $src) {
 			echo '<script type="text/javascript" src="', $src, '">';
 		}
-		echo andi_html_title_tag();
+		echo '<title>', self::$_title, '</title>';
 		foreach (self::$_headExtra as $code) {
 			echo $code;
 		}
