@@ -1,14 +1,26 @@
 <?php
 
-// Theme name.
+/*
+  Available out-of-the-box themes:
+    default   : The default hardcoded theme (also used as fallback).
+    plain     : Simple theme without any styling. You can easily customize it
+                using the header.php file (see that file for more details).
+    bootstrap : Bootstrap based theme.
+*/
 $config['theme'] = 'bootstrap';
-// Theme config, themes may have special configs.
-$config['theme-config'] = array(
-	// Bootstap theme, you can pick a Bootswatch theme.
-	// 'bootswatch' => 'readable'
+
+// Bootstrap theme specific configs.
+$config['theme-config']['bootstrap'] = array(
+	// Bootswatch theme, possible values:
+	// amelia, cerulean, cosmo, cyborg, darkly, flatly, journal, lumen, paper,
+	// readable, sandstone, simplex, slate, spacelab, superhero, united, yeti
+	// and none (to use the default Bootstrap style)
+	'bootswatch' => 'readable'
 );
 
-// Date format ('http://php.net/manual/en/function.date.php).
+// You can always tweak the style in the header.php file.
+
+// Date format (http://php.net/manual/en/function.date.php).
 $config['date-format'] = 'd-m-Y H:i:s';
 
 // Enable/Disable the JSON API (/?json=true).

@@ -39,17 +39,22 @@ if (isset($_GET['json']) && Andi::config('json-api')) {
 	exit();
 }
 
-$theme = strtolower(Andi::config('theme'));
+// Include the theme.
+$theme = Andi::theme();
 $theme_file = andi_build_dir_path(ANDI_THEMES_DIR, $theme, 'listing.php');
 if ($theme != 'default' && $theme != 'plain' && is_file($theme_file)) {
 	require $theme_file;
-} else {
-	AndiHtml::start();
-	if ($theme != 'plain') {
-		AndiHtml::appendToHead('<style>
+	exit();
+}
+
+// No custom theme? Will use a harcoded one...
+
+AndiHtml::start();
+
+if ($theme != 'plain') {
+	AndiHtml::appendToHead('<style>
 body {
-	font-family: monospace;
-	font-size: 1.25em;
+	font-family: sans-serif;
 	max-width: 750px;
 	margin: 20px auto;
 	padding: 0 20px;
@@ -69,11 +74,10 @@ table td {
 	border-bottom: 1px solid #d2d2d2;
 }
 </style>');
-	}
-
-	andi_html_all();
-
-	AndiHtml::end();
 }
+
+andi_html_all();
+
+AndiHtml::end();
 
 ?>

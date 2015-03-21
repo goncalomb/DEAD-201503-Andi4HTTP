@@ -2,7 +2,7 @@
 
 AndiHtml::start();
 
-$bootswatch_theme = Andi::config('theme-config', 'bootswatch');
+$bootswatch_theme = Andi::themeConfig('bootswatch');
 
 if ($bootswatch_theme && in_array($bootswatch_theme, array(
 	'amelia',

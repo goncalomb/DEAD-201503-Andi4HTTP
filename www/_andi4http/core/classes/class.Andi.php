@@ -6,6 +6,8 @@ final class Andi {
 	static $_urlPathParts;
 	static $_localPath;
 	static $_config;
+	static $_theme;
+	static $_themeConfig;
 
 	static function initialize() {
 		if (self::$_urlPath !== null) {
@@ -32,6 +34,21 @@ final class Andi {
 		};
 		self::$_config = $config_closure();
 		unset($config_closure);
+
+		// Theme and theme config.
+		self::$_theme = (
+			isset(self::$_config['theme']) ?
+			strtolower(self::$_config['theme']) :
+			'plain'
+		);
+		self::$_themeConfig = (
+			isset(self::$_config['theme-config'][self::$_theme]) ?
+			self::$_config['theme-config'][self::$_theme] :
+			array()
+		);
+
+		unset(self::$_config['theme']);
+		unset(self::$_config['theme-config']);
 	}
 
 	static function config($key=null) {
@@ -46,6 +63,14 @@ final class Andi {
 			return $result;
 		}
 		return null;
+	}
+
+	static function theme() {
+		return self::$_theme;
+	}
+
+	static function themeConfig($key) {
+		return (isset(self::$_themeConfig[$key]) ? self::$_themeConfig[$key] : null);
 	}
 
 	static function urlPath($as_array=false) {
