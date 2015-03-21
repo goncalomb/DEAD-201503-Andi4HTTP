@@ -1,7 +1,7 @@
 <?php
 
 function andi_html_header_global() {
-	andi_require_if_exists(ANDI_GLOBAL_DIR . DIRECTORY_SEPARATOR . 'header.php');
+	andi_require_if_exists(ANDI_DIR . DIRECTORY_SEPARATOR . 'header.php');
 }
 
 function andi_html_header_local() {
@@ -9,7 +9,7 @@ function andi_html_header_local() {
 }
 
 function andi_html_footer_global() {
-	andi_require_if_exists(ANDI_GLOBAL_DIR . DIRECTORY_SEPARATOR . 'footer.php');
+	andi_require_if_exists(ANDI_DIR . DIRECTORY_SEPARATOR . 'footer.php');
 }
 
 function andi_html_footer_local() {
