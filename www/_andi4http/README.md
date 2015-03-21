@@ -12,18 +12,20 @@ The 'core' directory (don't edit)
 
 Contains the core files of the project. As a user, you don't need edit these.
 
-The 'config.php' file (DO edit)
--------------------------------
-
-The configuration file. Go wild.
-
-The 'global' directory (DO edit)
---------------------------------
-
-Contains the global PHP templates for the header and footer, shown on every directory.
-
 The 'themes' directory (DO edit)
 --------------------------------
 
 The themes directory, put your themes here. Or just use the default ones.
 Choose your theme on the `config.php` file.
+
+The 'config.php' file (DO edit)
+-------------------------------
+
+The configuration file. Go wild.
+
+The 'header.php' and 'footer.php' files (DO edit)
+-------------------------------------------------
+
+The global PHP templates for the header and footer, shown on every directory.
+
+These files can also be used to tweak the page design (see `header.php` for more info).
