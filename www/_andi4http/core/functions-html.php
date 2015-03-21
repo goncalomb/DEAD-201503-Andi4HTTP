@@ -1,19 +1,27 @@
 <?php
 
 function andi_html_header_global() {
-	andi_require_if_exists(ANDI_DIR . DIRECTORY_SEPARATOR . 'header.php');
+	if (Andi::config('header-global')) {
+		andi_require_if_exists(ANDI_DIR . DIRECTORY_SEPARATOR . 'header.php');
+	}
 }
 
 function andi_html_header_local() {
-	andi_require_if_exists(Andi::localPath() . DIRECTORY_SEPARATOR . 'header.html');
+	if (Andi::config('header-local')) {
+		andi_require_if_exists(Andi::localPath() . DIRECTORY_SEPARATOR . 'header.html');
+	}
 }
 
 function andi_html_footer_global() {
-	andi_require_if_exists(ANDI_DIR . DIRECTORY_SEPARATOR . 'footer.php');
+	if (Andi::config('footer-global')) {
+		andi_require_if_exists(ANDI_DIR . DIRECTORY_SEPARATOR . 'footer.php');
+	}
 }
 
 function andi_html_footer_local() {
-	andi_require_if_exists(Andi::localPath() . DIRECTORY_SEPARATOR . 'footer.html');
+	if (Andi::config('footer-local')) {
+		andi_require_if_exists(Andi::localPath() . DIRECTORY_SEPARATOR . 'footer.html');
+	}
 }
 
 function andi_html_breadcrumbs() {

@@ -27,6 +27,15 @@ $config['date-format'] = 'd-m-Y H:i:s';
 // Enable/Disable the JSON API (/?json=true).
 $config['json-api'] = true;
 
+// Show/Hide headers and footers.
+// global : Global header and footer (for all directories).
+// local  : Per directory header and footer, using header.html and footer.html
+//          files on each directory.
+$config['header-global'] = true;
+$config['header-local'] = true;
+$config['footer-global'] = true;
+$config['footer-local'] = true;
+
 // Show/Hide breadcrumbs.
 $config['breadcrumbs'] = true;
 $config['breadcrumbs-on-root'] = false;
