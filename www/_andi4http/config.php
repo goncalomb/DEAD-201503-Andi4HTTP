@@ -26,6 +26,13 @@ $config['date-format'] = 'd-m-Y H:i:s';
 // Enable/Disable the JSON API (/?json=true).
 $config['json-api'] = true;
 
+// Breadcrumbs
+$config['breadcrumbs'] = true;
+$config['breadcrumbs-on-root'] = false;
+
+// Show parent link (../)
+$config['parent-link'] = false;
+
 // Show/Hide main table columns.
 $config['show-mimetype'] = false;
 $config['show-mtime'] = true;

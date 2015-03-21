@@ -48,8 +48,9 @@ footer {
 AndiHtml::setTitle('My Theme ROCKS! - ' . Andi::localPath());
 
 // Output all the main HTML code.
-// This includes local and global headers/footers and the main table.
-andi_html_all();
+// This includes local and global headers/footers and the main table and the
+// breadcrumbs (optional).
+andi_html_all(true);
 
 // Maybe add some HTML code in the end.
 echo '<p>Smoked salmon salad with tomato and olives...</p>';

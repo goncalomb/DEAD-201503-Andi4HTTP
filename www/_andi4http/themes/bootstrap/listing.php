@@ -20,7 +20,7 @@ if ($bootswatch_theme && in_array($bootswatch_theme, array(
 
 AndiHtml::appendToHead('<style>body { max-width: 750px; margin: 20px auto; padding: 0 20px; }</style>');
 
-andi_html_all('table table-condensed');
+andi_html_all();
 
 AndiHtml::end();
 

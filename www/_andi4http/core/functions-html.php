@@ -16,8 +16,30 @@ function andi_html_footer_local() {
 	andi_require_if_exists(Andi::localPath() . DIRECTORY_SEPARATOR . 'footer.html');
 }
 
-function andi_html_main_table($table_class='') {
-	echo '<table class="', $table_class, '">';
+function andi_html_breadcrumbs() {
+	$url_path_parts = Andi::urlPath(true);
+	$c = $i = count($url_path_parts);
+	if (!Andi::config('breadcrumbs') || (!Andi::config('breadcrumbs-on-root') && $c == 0)) {
+		return;
+	}
+	echo '<ol class="breadcrumb">';
+	if ($c > 0) {
+		echo '<li><a href="', str_repeat('../', $i--), '">', $_SERVER['HTTP_HOST'], '</a></li>';
+	}
+	foreach ($url_path_parts as $part) {
+		if ($i == 0) break;
+		echo '<li><a href="', str_repeat('../', $i--), '">', $part, '</a></li>';
+	}
+	if ($c > 0) {
+		echo '<li class="active">', $url_path_parts[$c - 1], '</li>';
+	} else {
+		echo '<li class="active">', $_SERVER['HTTP_HOST'], '</li>';
+	}
+	echo '</ol>';
+}
+
+function andi_html_main_table() {
+	echo '<table class="table">';
 
 	$finfo = null;
 	if (Andi::config('show-mimetype')) {
@@ -54,7 +76,7 @@ function andi_html_main_table($table_class='') {
 
 	echo '<tbody>';
 
-	if (count(Andi::urlPath(true))) {
+	if (Andi::config('parent-link') && count(Andi::urlPath(true))) {
 		echo '<tr><td><a href="..">../</a></td></tr>';
 	}
 
@@ -98,16 +120,23 @@ function andi_html_main_table($table_class='') {
 	echo '</table>';
 }
 
-function andi_html_all($main_table_class='') {
-	echo '<header>';
+function andi_html_all($no_breadcrumbs=false) {
+	echo '<header class="global">';
 	andi_html_header_global();
+	echo '</header>';
+	if (!$no_breadcrumbs) {
+		andi_html_breadcrumbs();
+	}
+	echo '<header class="local">';
 	andi_html_header_local();
 	echo '</header>';
 	echo '<main>';
-	andi_html_main_table($main_table_class);
+	andi_html_main_table();
 	echo '</main>';
-	echo '<footer>';
+	echo '<footer class="local">';
 	andi_html_footer_local();
+	echo '</footer>';
+	echo '<footer class="global">';
 	andi_html_footer_global();
 	echo '</footer>';
 }
