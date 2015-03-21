@@ -10,10 +10,10 @@ if ($bootswatch_theme && in_array($bootswatch_theme, array(
 	'darkly', 'flatly', 'journal',
 	'lumen', 'paper', 'readable',
 	'sandstone', 'simplex', 'slate',
-	'spacelab', 'superhero','united',
+	'spacelab', 'superhero', 'united',
 	'yeti'
 ))) {
-	AndiHtml::addCssFile('//cdn.jsdelivr.net/bootswatch/3.3.2/', $bootswatch_theme, '/bootstrap.min.css');
+	AndiHtml::addCssFile('//cdn.jsdelivr.net/bootswatch/3.3.2/' . $bootswatch_theme . '/bootstrap.min.css');
 } else {
 	AndiHtml::addCssFile('//cdn.jsdelivr.net/bootstrap/3.3.2/css/bootstrap.min.css');
 }
