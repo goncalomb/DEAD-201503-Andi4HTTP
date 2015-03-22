@@ -28,7 +28,7 @@ Andi::initialize();
 // Create main .htaccess that lives on the root directory.
 andi_write_htaccess(ANDI_ROOT_DIR . DIRECTORY_SEPARATOR . '.htaccess', '
 ServerSignature Off
-DirectoryIndex /_andi4http/core/listing.php
+DirectoryIndex ' . Andi::urlBase() . '/_andi4http/core/listing.php
 DirectorySlash On
 AcceptPathInfo Off
 RewriteEngine On
