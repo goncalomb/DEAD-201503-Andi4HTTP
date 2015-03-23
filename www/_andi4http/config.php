@@ -35,6 +35,9 @@ $config['header-global'] = true;
 $config['header-local'] = true;
 $config['footer-global'] = true;
 $config['footer-local'] = true;
+// Show/Hide global headers and footers on the error page.
+$config['header-global-on-error'] = false;
+$config['footer-global-on-error'] = true;
 
 // Show/Hide breadcrumbs.
 $config['breadcrumbs'] = true;

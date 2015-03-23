@@ -1,25 +1,25 @@
 <?php
 
 function andi_html_header_global() {
-	if (Andi::config('header-global')) {
+	if (Andi::config('header-global') && (ANDI_ERROR_CODE == 200 || Andi::config('header-global-on-error'))) {
 		andi_require_if_exists(ANDI_DIR . DIRECTORY_SEPARATOR . 'header.php');
 	}
 }
 
 function andi_html_header_local() {
-	if (Andi::config('header-local')) {
+	if (Andi::config('header-local') && ANDI_ERROR_CODE == 200) {
 		andi_require_if_exists(Andi::localPath() . DIRECTORY_SEPARATOR . 'header.html');
 	}
 }
 
 function andi_html_footer_global() {
-	if (Andi::config('footer-global')) {
+	if (Andi::config('footer-global') && (ANDI_ERROR_CODE == 200 || Andi::config('footer-global-on-error'))) {
 		andi_require_if_exists(ANDI_DIR . DIRECTORY_SEPARATOR . 'footer.php');
 	}
 }
 
 function andi_html_footer_local() {
-	if (Andi::config('footer-local')) {
+	if (Andi::config('footer-local') && ANDI_ERROR_CODE == 200) {
 		andi_require_if_exists(Andi::localPath() . DIRECTORY_SEPARATOR . 'footer.html');
 	}
 }
@@ -133,25 +133,33 @@ function andi_html_main_table() {
 }
 
 function andi_html_all($no_breadcrumbs=false) {
-	if (ANDI_ERROR_CODE != 200) {
-		andi_html_error();
-		return;
-	}
 	echo '<header class="global">';
 	andi_html_header_global();
 	echo '</header>';
-	if (!$no_breadcrumbs) {
-		andi_html_breadcrumbs();
+
+	if (ANDI_ERROR_CODE == 200) {
+		if (!$no_breadcrumbs) {
+			andi_html_breadcrumbs();
+		}
+
+		echo '<header class="local">';
+		andi_html_header_local();
+		echo '</header>';
+
+		echo '<main>';
+		andi_html_main_table();
+		echo '</main>';
+
+		echo '<footer class="local">';
+		andi_html_footer_local();
+		echo '</footer>';
+
+	} else {
+		echo '<main>';
+		andi_html_error();
+		echo '</main>';
 	}
-	echo '<header class="local">';
-	andi_html_header_local();
-	echo '</header>';
-	echo '<main>';
-	andi_html_main_table();
-	echo '</main>';
-	echo '<footer class="local">';
-	andi_html_footer_local();
-	echo '</footer>';
+
 	echo '<footer class="global">';
 	andi_html_footer_global();
 	echo '</footer>';
