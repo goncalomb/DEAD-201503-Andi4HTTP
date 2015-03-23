@@ -29,3 +29,8 @@ The 'header.php' and 'footer.php' files (DO edit)
 The global PHP templates for the header and footer, shown on every directory.
 
 These files can also be used to tweak the page design (see `header.php` for more info).
+
+The 'error.php' file (DO edit)
+------------------------------
+
+Error page template.

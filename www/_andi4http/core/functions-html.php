@@ -24,6 +24,10 @@ function andi_html_footer_local() {
 	}
 }
 
+function andi_html_error() {
+	andi_require_if_exists(ANDI_DIR . DIRECTORY_SEPARATOR . 'error.php');
+}
+
 function andi_html_breadcrumbs() {
 	$url_path_parts = Andi::urlPath(true);
 	$c = $i = count($url_path_parts);
@@ -129,6 +133,10 @@ function andi_html_main_table() {
 }
 
 function andi_html_all($no_breadcrumbs=false) {
+	if (ANDI_ERROR_CODE != 200) {
+		andi_html_error();
+		return;
+	}
 	echo '<header class="global">';
 	andi_html_header_global();
 	echo '</header>';
