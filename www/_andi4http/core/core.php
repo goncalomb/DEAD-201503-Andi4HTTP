@@ -22,9 +22,12 @@ define('ANDI_CONFIG_FILE', ANDI_DIR . DIRECTORY_SEPARATOR . 'config.php');
 $error_messages = array(
 	200 => 'OK',
 	400 => 'Bad Request',
+	401 => 'Unauthorized',
 	403 => 'Forbidden',
 	404 => 'Not Found',
+	405 => 'Method Not Allowed',
 	500 => 'Internal Server Error',
+	501 => 'Not Implemented',
 	503 => 'Service Temporarily Unavailable'
 );
 $error_code = (isset($_SERVER['REDIRECT_STATUS']) ? (int) $_SERVER['REDIRECT_STATUS'] : 200);
@@ -51,9 +54,12 @@ RewriteEngine On
 Options -MultiViews -Indexes -Includes -ExecCGI +FollowSymLinks
 
 ErrorDocument 400 ' . $main_listing_file . '
+ErrorDocument 401 ' . $main_listing_file . '
 ErrorDocument 403 ' . $main_listing_file . '
 ErrorDocument 404 ' . $main_listing_file . '
+ErrorDocument 405 ' . $main_listing_file . '
 ErrorDocument 500 ' . $main_listing_file . '
+ErrorDocument 501 ' . $main_listing_file . '
 ErrorDocument 503 ' . $main_listing_file . '
 
 AddDefaultCharset utf-8
