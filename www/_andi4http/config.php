@@ -27,6 +27,10 @@ $config['date-format'] = 'd-m-Y H:i:s';
 // Enable/Disable the JSON API (/?json=true).
 $config['json-api'] = true;
 
+// Serve robots.txt if one is missing.
+$config['robots'] = true;
+$config['robots-disallow'] = false;
+
 // Show/Hide headers and footers.
 // global : Global header and footer (for all directories).
 // local  : Per directory header and footer, using header.html and footer.html

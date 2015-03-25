@@ -43,6 +43,19 @@ spl_autoload_register(function($class_name) {
 
 Andi::initialize();
 
+// Serve robots.txt
+if (ANDI_ERROR_CODE == 404 && Andi::config('robots') && Andi::urlPath() == '/robots.txt') {
+	header('-', true, 200);
+	header('Content-Type: text/plain');
+	echo "User-agent: *\n";
+	if (Andi::config('robots-disallow')) {
+		echo "Disallow: /\n";
+	} else {
+		echo "Allow: /\n";
+	}
+	exit();
+}
+
 // Create main .htaccess that lives on the root directory.
 $main_listing_file = Andi::urlBase() . '/_andi4http/core/listing.php';
 andi_write_htaccess(ANDI_ROOT_DIR . DIRECTORY_SEPARATOR . '.htaccess', '
